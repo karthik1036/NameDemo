@@ -3,13 +3,13 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "hostingPlanName": {
-      "value": "webApplication-Service-plan"
+      "value": "WebApplication19-hostingPlan"
     },
-    "webpp035PackageFolder": {
-      "value": "WebApplication19"
-    },
-    "webpp035PackageFileName": {
+    "WebApplication19PackageFileName": {
       "value": "package.zip"
+    },
+    "WebApplication19PackageFolder": {
+      "value": "WebApplication19"
     }
   }
 }

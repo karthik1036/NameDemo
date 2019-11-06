@@ -41,14 +41,14 @@
     "_artifactsLocationSasToken": {
       "type": "securestring"
     },
-    "webpp035PackageFolder": {
+    "WebApplication19PackageFolder": {
       "type": "string",
       "minLength": 1,
       "metadata": {
         "description": "WebDeploy package location. This path is relative to the _artifactsLocation parameter"
       }
     },
-    "webpp035PackageFileName": {
+    "WebApplication19PackageFileName": {
       "type": "string",
       "minLength": 1,
       "metadata": {
@@ -102,10 +102,10 @@
             "[resourceId('Microsoft.Web/sites', variables('webSiteName'))]"
           ],
           "tags": {
-            "displayName": "webpp035"
+            "displayName": "WebApplication19"
           },
           "properties": {
-            "packageUri": "[concat(parameters('_artifactsLocation'), '/', parameters('webpp035PackageFolder'), '/', parameters('webpp035PackageFileName'), parameters('_artifactsLocationSasToken'))]",
+            "packageUri": "[concat(parameters('_artifactsLocation'), '/', parameters('WebApplication19PackageFolder'), '/', parameters('WebApplication19PackageFileName'), parameters('_artifactsLocationSasToken'))]",
             "dbType": "None",
             "connectionString": "",
             "setParameters": {
@@ -113,6 +113,7 @@
             }
           }
         }
+        
       ]
     },
     {
