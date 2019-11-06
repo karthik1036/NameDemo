@@ -24,13 +24,11 @@
                 WelCome To Dotnet World Hello World 
                 HIII
             </h3>
-            <h4>Human Technology karthik are data information are there information</h4>
+            <h4>Human Technology </h4>
             <b>
                 Azure-Devops
             </b>
-            <h5>
-                Kv karthik kumar
-            </h5>
+           
         </div>
     </form>
 </body>
