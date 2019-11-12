@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>ddba4758-8e88-4918-83db-0e9b9d3f4fdc</ProjectGuid>
+    <ProjectGuid>bb218381-e41e-4a35-af9d-79fa6183cdea</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup>
     <PrepareForBuildDependsOn>
@@ -33,7 +33,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WebApplication19\WebApplication19.csproj">
       <Targets>Build;Package</Targets>
-      <AdditionalProperties>PackageLocation=..\AzureResourceGroup2\$(ProjectReferencesOutputPath)\WebApplication19\package.zip</AdditionalProperties>
+      <AdditionalProperties>PackageLocation=..\Deploy-WebApp(ARM)\$(ProjectReferencesOutputPath)\WebApplication19\package.zip</AdditionalProperties>
       <IncludeFilePath>$(ProjectReferencesOutputPath)\WebApplication19\package.zip</IncludeFilePath>
     </ProjectReference>
   </ItemGroup>

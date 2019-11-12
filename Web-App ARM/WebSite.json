@@ -35,30 +35,14 @@
         "description": "Describes plan's instance count"
       }
     },
-    "_artifactsLocation": {
-      "type": "string"
-    },
-    "_artifactsLocationSasToken": {
-      "type": "securestring"
-    },
-    "WebApplication19PackageFolder": {
+    "webSiteName": {
       "type": "string",
-      "minLength": 1,
-      "metadata": {
-        "description": "WebDeploy package location. This path is relative to the _artifactsLocation parameter"
-      }
-    },
-    "WebApplication19PackageFileName": {
-      "type": "string",
-      "minLength": 1,
-      "metadata": {
-        "description": "Name of the webdeploy package"
-      }
+      "default value": "Name-Demo"
     }
   },
   "variables": {
-    "webSiteName": "[concat('webSite', uniqueString(resourceGroup().id))]"
-  },
+   
+},
   "resources": [
     {
       "apiVersion": "2015-08-01",
@@ -78,7 +62,7 @@
     },
     {
       "apiVersion": "2015-08-01",
-      "name": "[variables('webSiteName')]",
+      "name": "[parameters('webSiteName')]",
       "type": "Microsoft.Web/sites",
       "location": "[resourceGroup().location]",
       "tags": {
@@ -89,31 +73,9 @@
         "[resourceId('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]"
       ],
       "properties": {
-        "name": "[variables('webSiteName')]",
+        "name": "[parameters('webSiteName')]",
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
-      },
-      "resources": [
-        {
-          "name": "MSDeploy",
-          "type": "extensions",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2015-08-01",
-          "dependsOn": [
-            "[resourceId('Microsoft.Web/sites', variables('webSiteName'))]"
-          ],
-          "tags": {
-            "displayName": "WebApplication19"
-          },
-          "properties": {
-            "packageUri": "[concat(parameters('_artifactsLocation'), '/', parameters('WebApplication19PackageFolder'), '/', parameters('WebApplication19PackageFileName'), parameters('_artifactsLocationSasToken'))]",
-            "dbType": "None",
-            "connectionString": "",
-            "setParameters": {
-              "IIS Web Application Name": "[variables('webSiteName')]"
-            }
-          }
-        }
-      ]
+      }
     },
     {
       "apiVersion": "2014-04-01",
@@ -183,25 +145,25 @@
     },
     {
       "apiVersion": "2014-04-01",
-      "name": "[concat('ServerErrors ', variables('webSiteName'))]",
+      "name": "[concat('ServerErrors ', parameters('webSiteName'))]",
       "type": "Microsoft.Insights/alertrules",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/', variables('webSiteName'))]"
+        "[resourceId('Microsoft.Web/sites/', parameters('webSiteName'))]"
       ],
       "tags": {
-        "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', variables('webSiteName'))]": "Resource",
+        "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', parameters('webSiteName'))]": "Resource",
         "displayName": "ServerErrorsAlertRule"
       },
       "properties": {
-        "name": "[concat('ServerErrors ', variables('webSiteName'))]",
-        "description": "[concat(variables('webSiteName'), ' has some server errors, status code 5xx.')]",
+        "name": "[concat('ServerErrors ', parameters('webSiteName'))]",
+        "description": "[concat(parameters('webSiteName'), ' has some server errors, status code 5xx.')]",
         "isEnabled": false,
         "condition": {
           "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
           "dataSource": {
             "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
-            "resourceUri": "[concat(resourceGroup().id, '/providers/Microsoft.Web/sites/', variables('webSiteName'))]",
+            "resourceUri": "[concat(resourceGroup().id, '/providers/Microsoft.Web/sites/', parameters('webSiteName'))]",
             "metricName": "Http5xx"
           },
           "operator": "GreaterThan",
@@ -217,25 +179,25 @@
     },
     {
       "apiVersion": "2014-04-01",
-      "name": "[concat('ForbiddenRequests ', variables('webSiteName'))]",
+      "name": "[concat('ForbiddenRequests ', parameters('webSiteName'))]",
       "type": "Microsoft.Insights/alertrules",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/', variables('webSiteName'))]"
+        "[resourceId('Microsoft.Web/sites/', parameters('webSiteName'))]"
       ],
       "tags": {
-        "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', variables('webSiteName'))]": "Resource",
+        "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', parameters('webSiteName'))]": "Resource",
         "displayName": "ForbiddenRequestsAlertRule"
       },
       "properties": {
-        "name": "[concat('ForbiddenRequests ', variables('webSiteName'))]",
-        "description": "[concat(variables('webSiteName'), ' has some requests that are forbidden, status code 403.')]",
+        "name": "[concat('ForbiddenRequests ', parameters('webSiteName'))]",
+        "description": "[concat(parameters('webSiteName'), ' has some requests that are forbidden, status code 403.')]",
         "isEnabled": false,
         "condition": {
           "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
           "dataSource": {
             "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
-            "resourceUri": "[concat(resourceGroup().id, '/providers/Microsoft.Web/sites/', variables('webSiteName'))]",
+            "resourceUri": "[concat(resourceGroup().id, '/providers/Microsoft.Web/sites/', parameters('webSiteName'))]",
             "metricName": "Http403"
           },
           "operator": "GreaterThan",
@@ -285,8 +247,8 @@
     },
     {
       "apiVersion": "2014-04-01",
-      "name": "[concat('LongHttpQueue ', parameters('hostingPlanName'))]",
-      "type": "Microsoft.Insights/alertrules",
+      "name": "[parameters('webSiteName')]",
+      "type": "Microsoft.Insights/components",
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]"
@@ -319,18 +281,18 @@
     },
     {
       "apiVersion": "2014-04-01",
-      "name": "[variables('webSiteName')]",
+      "name": "[parameters('webSiteName')]",
       "type": "Microsoft.Insights/components",
       "location": "East US",
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/', variables('webSiteName'))]"
+        "[resourceId('Microsoft.Web/sites/', parameters('webSiteName'))]"
       ],
       "tags": {
-        "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', variables('webSiteName'))]": "Resource",
+        "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', parameters('webSiteName'))]": "Resource",
         "displayName": "AppInsightsComponent"
       },
       "properties": {
-        "applicationId": "[variables('webSiteName')]"
+        "applicationId": "[parameters('webSiteName')]"
       }
     }
   ]
