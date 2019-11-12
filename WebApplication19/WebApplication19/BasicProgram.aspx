@@ -6,27 +6,23 @@
 <head runat="server">
     <title></title>
 </head>
-<body>
+    <center><h1> <b>
+       welcome to dotnetweb-application
+     </b>  </h1></center>
+<body bgcolor="red">
     <form id="form1" runat="server">
         <div>
-            <h1>
-               
-                <b>
-                Hi dotnetweb-application
-               </b>
-            </h1>
+            
              <h2>
                 <b>
                 Hi dotnetweb-application
                </b>
             </h2>
             <h3>
-                WelCome To Dotnet World Hello World 
-                HIII
+                web Application through ARM TEMPLATE
             </h3>
-            <h4>Human Technology </h4>
             <b>
-                Azure-Devops
+                ARM TEMPLATE THROUGH Azure-Devops
             </b>
            
         </div>
