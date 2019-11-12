@@ -25,7 +25,7 @@
                 ARM TEMPLATE THROUGH Azure-Devops
             </b>
             <b>
-                Karthik-Kasula
+                Karthik-Kasula -Kumar
             </b>
            
         </div>
