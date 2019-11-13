@@ -25,7 +25,7 @@
                 ARM TEMPLATE THROUGH Azure-Devops
             </b>
             <b>
-                Karthik-Kasula Hiiiiiiii hello Demo
+                Karthik-Kasula 
             </b>
            
         </div>
